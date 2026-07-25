@@ -1,1 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Camera Dashboard | Ioloware</title>
+<meta name="description" content="Keep an eye on all your Ring cameras from your Roku TV. Camera Dashboard shows each camera's latest motion event in one clear overview.">
+<style>
+  :root {
+    --bg: #0a0a1a;
+    --panel: #12122a;
+    --text: #e8e8f2;
+    --muted: #a0a0b8;
+    --accent: #4fc3f7;
+    --accent-2: #7c5cff;
+    --border: #26264a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+  }
+  a { color: var(--accent); }
+  header {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  header .wrap {
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+  }
+  .brand {
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.35em;
+    color: var(--text);
+    text-decoration: none;
+  }
+  main { max-width: 960px; margin: 0 auto; padding: 0 1.5rem 4rem; }
+  section { margin-top: 3.5rem; }
+
+  .hero { display: flex; flex-wrap: wrap; align-items: center; gap: 2rem; margin-top: 3rem; }
+  .hero img { width: 290px; max-width: 100%; border-radius: 12px; }
+  .hero-text { flex: 1 1 320px; }
+  h1 { font-size: 2.4rem; line-height: 1.15; margin-bottom: 0.75rem; }
+  .tagline { font-size: 1.25rem; color: var(--accent); margin-bottom: 1.25rem; }
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 2px solid var(--accent);
+    display: inline-block;
+  }
+  h3 { font-size: 1.1rem; margin: 1.5rem 0 0.5rem; color: var(--accent); }
+  p { margin-bottom: 1rem; }
+  ul { margin: 0 0 1rem 1.4rem; }
+  li { margin-bottom: 0.35rem; }
+
+  .btn {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--accent-2), var(--accent));
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 0.7rem 1.5rem;
+    border-radius: 8px;
+  }
+  .btn:hover { filter: brightness(1.15); }
+
+  .screens { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
+  .screens img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    display: block;
+  }
+  .caption { color: var(--muted); font-size: 0.9rem; margin-top: 0.4rem; }
+
+  .notice {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  .privacy { color: var(--text); }
+  .privacy .effective { color: var(--muted); font-style: italic; margin-bottom: 1rem; }
+
+  form {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem;
+    max-width: 560px;
+  }
+  .row { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .field { flex: 1 1 200px; margin-bottom: 1rem; }
+  label { display: block; font-size: 0.9rem; margin-bottom: 0.3rem; color: var(--muted); }
+  input, textarea {
+    width: 100%;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text);
+    padding: 0.6rem 0.75rem;
+    font: inherit;
+  }
+  input:focus, textarea:focus { outline: 2px solid var(--accent); border-color: transparent; }
+  textarea { min-height: 120px; resize: vertical; }
+  .form-note { color: var(--muted); font-size: 0.85rem; margin-top: 0.75rem; }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 1.5rem;
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="brand" href="#">IOLOWARE</a>
+  </div>
+</header>
+
+<main>
+  <div class="hero">
+    <img src="images/channel-art.png" alt="Camera Dashboard channel art">
+    <div class="hero-text">
+      <h1>Camera Dashboard</h1>
+      <p class="tagline">Keep an eye on all your Ring cameras from your Roku TV.</p>
+      <a class="btn" href="https://channelstore.roku.com/details/302be5ac2e684f3e7844a0b50821ef7c:a86dc65e9927752a40d67f175c09a46a/camera-dashboard">Get it on the Roku Channel Store</a>
+    </div>
+  </div>
+
+  <section>
+    <p>Connect Camera Dashboard through the Ring Appstore, choose the cameras you want to include, then open the Camera Dashboard Roku channel to see each camera&rsquo;s latest motion event in one clear overview.</p>
+    <p>Select any camera to watch the recorded event.</p>
+    <p>Ideal for homes, short-term rentals, stores, and workplaces.</p>
+  </section>
+
+  <section class="screens">
+    <div>
+      <img src="images/events-grid.jpg" alt="Camera Dashboard on Roku showing a grid of recent motion events from multiple Ring cameras">
+      <p class="caption">Every camera&rsquo;s latest motion event in one clear overview.</p>
+    </div>
+    <div>
+      <img src="images/tv-lifestyle.png" alt="A living-room TV showing Camera Dashboard playing recorded events from four cameras">
+      <p class="caption">Watch recorded events right on your TV.</p>
+    </div>
+  </section>
+
+  <section>
+    <p class="notice">Camera Dashboard is an independent third-party application and is not affiliated with, endorsed by, or sponsored by Ring, Amazon, or Roku. Ring and Roku are trademarks of their respective owners. Compatible devices and a Ring subscription supporting recorded events are required.</p>
+  </section>
+
+  <section class="privacy" id="privacy">
+    <h2>Camera Dashboard Privacy Policy</h2>
+    <p class="effective">Effective date: July 20, 2026</p>
+    <p>Camera Dashboard lets you view recent motion and doorbell events from cameras connected to your Ring account on a paired Roku device. This policy explains how Camera Dashboard (&ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;the app&rdquo;) handles information.</p>
+
+    <h3>Information We Handle</h3>
+    <p>When you connect your Ring account, Camera Dashboard receives and stores only the information needed to operate the service:</p>
+    <ul>
+      <li>Ring authorization tokens and an account identifier</li>
+      <li>Camera identifiers and names</li>
+      <li>Motion and doorbell event types and timestamps</li>
+      <li>Event snapshots</li>
+      <li>A recorded event clip when you choose to play it</li>
+      <li>Random tokens used to pair and authenticate your Roku device</li>
+    </ul>
+    <p>Ring may provide basic profile information while verifying your account connection. Camera Dashboard does not store or use your name or email address.</p>
+    <p>Our hosting provider may process limited network and diagnostic information required to operate and secure the service.</p>
+
+    <h3>How We Use Information</h3>
+    <p>We use information only to connect your account, display recent camera events, play recordings you select, maintain security, and troubleshoot the service.</p>
+    <p>Camera Dashboard does not use camera footage, snapshots, metadata, or other customer data to train or improve artificial intelligence or machine-learning models. The app does not perform facial recognition, biometric identification, object detection, or other AI analysis of camera footage.</p>
+
+    <h3>Storage and Sharing</h3>
+    <p>Camera Dashboard uses Amazon Web Services to host the service and store app data on our behalf. The app communicates with Ring to obtain the camera information and recordings you authorize. Time-limited links are provided to your paired Roku device so it can display snapshots and play recordings.</p>
+    <p>We do not routinely view customer camera footage. Authorized personnel may access customer data only when necessary to resolve a user-requested support issue, investigate security or abuse, maintain or troubleshoot the service, comply with law, or protect the service and its users. Footage is not reviewed by humans for AI training, advertising, profiling, or content analysis.</p>
+    <p>We do not otherwise disclose camera data except when required by law or necessary to protect the service and its users.</p>
+    <p>We use HTTPS, private cloud storage, access controls, and time-limited media links. No storage or transmission method is completely secure, but we take reasonable measures appropriate to the sensitivity of camera data.</p>
+
+    <h3>Retention and Deletion</h3>
+    <p>Camera event records, snapshots, and downloaded recordings become eligible for automatic deletion seven days after they are stored. Deletion is performed automatically by our cloud provider and may take additional time to complete.</p>
+    <p>Pairing codes expire after 15 minutes, and browser pairing sessions expire after 24 hours.</p>
+    <p>You may withdraw access at any time by disconnecting Camera Dashboard through the Ring Appstore. Disconnecting stops new collection and triggers deletion of the app&rsquo;s stored authorization tokens, event records, media, sessions, and Roku pairing records.</p>
+    <p>To request deletion through another method, submit a request using our contact form and include &ldquo;Privacy Request&rdquo; or &ldquo;Data Deletion&rdquo; in your message. We may ask you to verify control of the connected account and will confirm when deletion is complete.</p>
+
+    <h3>Children</h3>
+    <p>Camera Dashboard is not directed to children under 13, and we do not knowingly collect personal information directly from children.</p>
+
+    <h3>Third-Party Services</h3>
+    <p>Your use of Ring, Roku, and Amazon Web Services is also subject to the privacy practices of their respective operators.</p>
+    <p>Camera Dashboard is an independent third-party application and is not affiliated with, endorsed by, or sponsored by Ring, Amazon, or Roku.</p>
+
+    <h3>Changes and Contact</h3>
+    <p>We may update this policy when the app or its data practices change. Any revised policy will be posted with an updated effective date.</p>
+    <p>If we introduce AI capabilities or change how customer data is used, we will update this policy before the change takes effect and provide any notices or choices required by law.</p>
+    <p>For questions, support, privacy concerns, or deletion requests, please use our contact form.</p>
+  </section>
+
+  <section id="contact">
+    <h2>Contact us</h2>
+    <form id="contact-form">
+      <div class="row">
+        <div class="field">
+          <label for="first-name">First name *</label>
+          <input id="first-name" name="first-name" required autocomplete="given-name">
+        </div>
+        <div class="field">
+          <label for="last-name">Last name</label>
+          <input id="last-name" name="last-name" autocomplete="family-name">
+        </div>
+      </div>
+      <div class="field">
+        <label for="email">Email *</label>
+        <input id="email" name="email" type="email" required autocomplete="email">
+      </div>
+      <div class="field">
+        <label for="message">Write a message</label>
+        <textarea id="message" name="message"></textarea>
+      </div>
+      <button class="btn" type="submit">Submit</button>
+      <p class="form-note">Submitting opens your email app with the message pre-addressed to us.</p>
+    </form>
+  </section>
+</main>
+
+<footer>
+  &copy;2026 by Ioloware.
+</footer>
+
+<script>
+  document.getElementById('contact-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var first = document.getElementById('first-name').value.trim();
+    var last = document.getElementById('last-name').value.trim();
+    var email = document.getElementById('email').value.trim();
+    var message = document.getElementById('message').value.trim();
+    var name = (first + ' ' + last).trim();
+    var subject = 'Camera Dashboard contact from ' + name;
+    var body = 'Name: ' + name + '\nEmail: ' + email + '\n\n' + message;
+    var to = ['ioloware', 'proton.me'].join('@');
+    window.location.href = 'mailto:' + to +
+      '?subject=' + encodeURIComponent(subject) +
+      '&body=' + encodeURIComponent(body);
+  });
+</script>
+
+</body>
+</html>
 
