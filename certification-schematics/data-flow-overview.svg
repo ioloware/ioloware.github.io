@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="700" viewBox="0 0 1600 700" role="img" aria-labelledby="title desc">
+  <title id="title">Camera Dashboard simplified data flow</title>
+  <desc id="desc">Five-stage overview showing Ring authorization and events flowing through the Camera Dashboard AWS service to private storage and an authorized Roku device.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#2563eb"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="135%">
+      <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#0f172a" flood-opacity="0.12"/>
+    </filter>
+    <style>
+      .title { font: 700 34px Inter, Arial, sans-serif; fill: #0f172a; }
+      .subtitle { font: 400 18px Inter, Arial, sans-serif; fill: #475569; }
+      .node-title { font: 700 19px Inter, Arial, sans-serif; fill: #0f172a; text-anchor: middle; }
+      .node-body { font: 400 14px Inter, Arial, sans-serif; fill: #334155; text-anchor: middle; }
+      .edge { font: 600 13px Inter, Arial, sans-serif; fill: #1e3a8a; text-anchor: middle; }
+      .band-title { font: 700 15px Inter, Arial, sans-serif; fill: #0f172a; }
+      .band-body { font: 400 14px Inter, Arial, sans-serif; fill: #334155; }
+      .foot { font: 400 13px Inter, Arial, sans-serif; fill: #64748b; }
+      .node { fill: #ffffff; stroke: #cbd5e1; stroke-width: 1.5; rx: 18; filter: url(#shadow); }
+      .ring { fill: #eff6ff; stroke: #60a5fa; }
+      .aws { fill: #f8fafc; stroke: #94a3b8; }
+      .data { fill: #ecfdf5; stroke: #34d399; }
+      .roku { fill: #f5f3ff; stroke: #a78bfa; }
+      .flow { fill: none; stroke: #2563eb; stroke-width: 3.5; marker-end: url(#arrow); }
+    </style>
+  </defs>
+
+  <rect width="1600" height="700" fill="#f8fafc"/>
+  <text x="60" y="62" class="title">Camera Dashboard — Simplified Data Flow</text>
+  <text x="60" y="94" class="subtitle">Only the data required to show recent Ring events on an authorized Roku device</text>
+
+  <rect x="55" y="175" width="255" height="180" class="node ring" rx="18"/>
+  <text x="182" y="217" class="node-title">1. Ring user + Ring</text>
+  <text x="182" y="252" class="node-body">User authorizes in Ring Appstore</text>
+  <text x="182" y="278" class="node-body">Ring sends signed event notices</text>
+  <text x="182" y="304" class="node-body">and supplies selected media</text>
+  <text x="182" y="334" class="node-body">No Ring password is shared</text>
+
+  <rect x="375" y="175" width="255" height="180" class="node aws" rx="18"/>
+  <text x="502" y="217" class="node-title">2. Secure intake</text>
+  <text x="502" y="252" class="node-body">Lambda validates HMAC, dedupes</text>
+  <text x="502" y="278" class="node-body">events and queues them in SQS</text>
+  <text x="502" y="304" class="node-body">OAuth, browser and Roku requests</text>
+  <text x="502" y="330" class="node-body">are authenticated</text>
+
+  <rect x="695" y="175" width="255" height="180" class="node aws" rx="18"/>
+  <text x="822" y="217" class="node-title">3. Minimal processing</text>
+  <text x="822" y="252" class="node-body">Processor Lambda fetches a snapshot</text>
+  <text x="822" y="278" class="node-body">and stores recent event metadata</text>
+  <text x="822" y="304" class="node-body">API Lambda fetches a recording only</text>
+  <text x="822" y="330" class="node-body">when the user selects playback</text>
+
+  <rect x="1015" y="175" width="255" height="180" class="node data" rx="18"/>
+  <text x="1142" y="217" class="node-title">4. Private AWS storage</text>
+  <text x="1142" y="252" class="node-body">DynamoDB: tokens + event data</text>
+  <text x="1142" y="278" class="node-body">S3: snapshots + selected clips</text>
+  <text x="1142" y="304" class="node-body">Private, encrypted at rest</text>
+  <text x="1142" y="330" class="node-body">Events and media expire in 7 days</text>
+
+  <rect x="1335" y="175" width="210" height="180" class="node roku" rx="18"/>
+  <text x="1440" y="217" class="node-title">5. Paired Roku</text>
+  <text x="1440" y="252" class="node-body">15-min single-use pair code</text>
+  <text x="1440" y="278" class="node-body">Separate 256-bit poll secret</text>
+  <text x="1440" y="304" class="node-body">256-bit bearer device token</text>
+  <text x="1440" y="330" class="node-body">HTTPS links expire in 15m / 1h</text>
+
+  <path d="M310 265 L375 265" class="flow"/>
+  <path d="M630 265 L695 265" class="flow"/>
+  <path d="M950 265 L1015 265" class="flow"/>
+  <path d="M1270 265 L1335 265" class="flow"/>
+
+  <rect x="55" y="430" width="730" height="112" rx="16" fill="#eff6ff" stroke="#93c5fd"/>
+  <text x="83" y="466" class="band-title">Purpose limitation</text>
+  <text x="83" y="494" class="band-body">Ring data is used only to connect the account, display recent events, play a selected clip,</text>
+  <text x="83" y="518" class="band-body">secure the service and troubleshoot. No advertising, profiling, facial recognition or AI training.</text>
+
+  <rect x="815" y="430" width="730" height="112" rx="16" fill="#ecfdf5" stroke="#6ee7b7"/>
+  <text x="843" y="466" class="band-title">Two disconnect controls</text>
+  <text x="843" y="494" class="band-body">Roku channel → removes that Roku’s server-side credential and clears its local token and cache.</text>
+  <text x="843" y="518" class="band-body">Ring Appstore → stops account processing and deletes tokens, data, media, sessions and pairings.</text>
+
+  <text x="60" y="608" class="foot">AWS components: Lambda, SQS, DynamoDB, private S3, SSM Parameter Store and CloudWatch.</text>
+  <text x="60" y="634" class="foot">Detailed architecture, retention inventory and deletion workflow are available as supporting schematics.</text>
+</svg>

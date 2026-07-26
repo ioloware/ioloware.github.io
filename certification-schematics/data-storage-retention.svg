@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1080" viewBox="0 0 1600 1080" role="img" aria-labelledby="title desc">
+  <title id="title">Camera Dashboard data storage and retention inventory</title>
+  <desc id="desc">Table of Ring-derived data categories, storage systems, purposes, access controls, and current retention or deletion behavior.</desc>
+  <defs>
+    <filter id="shadow" x="-5%" y="-10%" width="110%" height="130%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#0f172a" flood-opacity="0.1"/>
+    </filter>
+    <style>
+      .title { font: 700 34px Inter, Arial, sans-serif; fill: #0f172a; }
+      .subtitle { font: 400 18px Inter, Arial, sans-serif; fill: #475569; }
+      .head { font: 700 15px Inter, Arial, sans-serif; fill: #ffffff; letter-spacing: .03em; }
+      .cell-title { font: 700 15px Inter, Arial, sans-serif; fill: #0f172a; }
+      .cell { font: 400 13.5px Inter, Arial, sans-serif; fill: #334155; }
+      .note-title { font: 700 15px Inter, Arial, sans-serif; fill: #92400e; }
+      .note { font: 400 14px Inter, Arial, sans-serif; fill: #78350f; }
+      .footer { font: 400 13px Inter, Arial, sans-serif; fill: #64748b; }
+      .grid { stroke: #cbd5e1; stroke-width: 1; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="1080" fill="#f8fafc"/>
+  <text x="50" y="58" class="title">Camera Dashboard — Data Storage and Retention</text>
+  <text x="50" y="90" class="subtitle">Current implementation inventory for privacy, legal, and security review</text>
+
+  <rect x="40" y="126" width="1520" height="768" rx="16" fill="#ffffff" stroke="#cbd5e1" filter="url(#shadow)"/>
+  <path d="M56 126 H1544 Q1560 126 1560 142 V190 H40 V142 Q40 126 56 126 Z" fill="#1e3a8a"/>
+
+  <text x="64" y="166" class="head">DATA CATEGORY</text>
+  <text x="342" y="166" class="head">SYSTEM</text>
+  <text x="602" y="166" class="head">PURPOSE AND ACCESS PATH</text>
+  <text x="1090" y="166" class="head">CURRENT RETENTION / DELETION</text>
+
+  <line x1="318" y1="126" x2="318" y2="894" class="grid"/>
+  <line x1="575" y1="126" x2="575" y2="894" class="grid"/>
+  <line x1="1060" y1="126" x2="1060" y2="894" class="grid"/>
+
+  <rect x="40" y="190" width="1520" height="88" fill="#eff6ff"/>
+  <text x="64" y="221" class="cell-title">OAuth tokens, opaque account ID,</text>
+  <text x="64" y="244" class="cell-title">camera IDs and names</text>
+  <text x="342" y="221" class="cell-title">Amazon DynamoDB</text>
+  <text x="342" y="246" class="cell">Encrypted at rest</text>
+  <text x="602" y="221" class="cell">Connect to Ring, refresh access, route account events,</text>
+  <text x="602" y="244" class="cell">and label cameras. Lambda IAM roles only.</text>
+  <text x="1090" y="221" class="cell-title">While the Ring account is connected</text>
+  <text x="1090" y="246" class="cell">Account-wide deletion on disconnect.</text>
+
+  <rect x="40" y="278" width="1520" height="88" fill="#ffffff"/>
+  <text x="64" y="310" class="cell-title">Event IDs, types, timestamps,</text>
+  <text x="64" y="333" class="cell-title">camera identifiers and names</text>
+  <text x="342" y="310" class="cell-title">Amazon DynamoDB</text>
+  <text x="342" y="335" class="cell">TTL-enabled event rows</text>
+  <text x="602" y="310" class="cell">List and sort recent motion / doorbell events.</text>
+  <text x="602" y="333" class="cell">API Lambda reads for the authenticated Roku.</text>
+  <text x="1090" y="310" class="cell-title">Seven-day TTL</text>
+  <text x="1090" y="335" class="cell">Also deleted on disconnect; TTL deletion is asynchronous.</text>
+
+  <rect x="40" y="366" width="1520" height="88" fill="#ecfdf5"/>
+  <text x="64" y="410" class="cell-title">Event snapshots (JPEG)</text>
+  <text x="342" y="398" class="cell-title">Private Amazon S3</text>
+  <text x="342" y="423" class="cell">Public access blocked</text>
+  <text x="602" y="398" class="cell">Preview recent events. Processor Lambda writes;</text>
+  <text x="602" y="421" class="cell">authorized Roku receives a 15-minute presigned URL.</text>
+  <text x="1090" y="398" class="cell-title">Seven-day S3 lifecycle</text>
+  <text x="1090" y="423" class="cell">Also deleted by account-prefix on disconnect.</text>
+
+  <rect x="40" y="454" width="1520" height="88" fill="#ffffff"/>
+  <text x="64" y="498" class="cell-title">Selected event clip (MP4)</text>
+  <text x="342" y="486" class="cell-title">Private Amazon S3</text>
+  <text x="342" y="511" class="cell">Fetched only on demand</text>
+  <text x="602" y="486" class="cell">Playback after the user selects an event.</text>
+  <text x="602" y="509" class="cell">Authorized Roku receives a one-hour presigned URL.</text>
+  <text x="1090" y="486" class="cell-title">Seven-day S3 lifecycle</text>
+  <text x="1090" y="511" class="cell">Also deleted by account-prefix on disconnect.</text>
+
+  <rect x="40" y="542" width="1520" height="88" fill="#f5f3ff"/>
+  <text x="64" y="574" class="cell-title">Pairing, browser-session, poll,</text>
+  <text x="64" y="597" class="cell-title">and Roku-device tokens</text>
+  <text x="342" y="574" class="cell-title">DynamoDB + Roku registry</text>
+  <text x="342" y="599" class="cell">Cryptographically random tokens</text>
+  <text x="602" y="574" class="cell">Pair browser and Roku; authenticate Roku API calls.</text>
+  <text x="602" y="597" class="cell">Secure / HttpOnly / SameSite browser cookie.</text>
+  <text x="1090" y="568" class="cell-title">Pair code: 15 min • Browser session: 90 days</text>
+  <text x="1090" y="592" class="cell">Roku device token: while connected; removable by re-pair.</text>
+  <text x="1090" y="615" class="cell">All linked records deleted on disconnect.</text>
+
+  <rect x="40" y="630" width="1520" height="88" fill="#fff7ed"/>
+  <text x="64" y="674" class="cell-title">Signed event queue messages</text>
+  <text x="342" y="662" class="cell-title">Amazon SQS + DLQ</text>
+  <text x="342" y="687" class="cell">Encrypted service queues</text>
+  <text x="602" y="662" class="cell">Reliable event delivery, retry and failure isolation.</text>
+  <text x="602" y="685" class="cell">Processor drops events after an account is removed.</text>
+  <text x="1090" y="657" class="cell-title">Normally removed immediately after processing</text>
+  <text x="1090" y="681" class="cell">Main queue: AWS default, up to 4 days.</text>
+  <text x="1090" y="704" class="cell">Dead-letter queue: currently up to 14 days.</text>
+
+  <rect x="40" y="718" width="1520" height="88" fill="#ffffff"/>
+  <text x="64" y="750" class="cell-title">Operational logs and opaque IDs</text>
+  <text x="64" y="773" class="cell">No snapshot or video bytes</text>
+  <text x="342" y="750" class="cell-title">Amazon CloudWatch</text>
+  <text x="342" y="775" class="cell">Lambda logs and metrics</text>
+  <text x="602" y="750" class="cell">Troubleshooting, security investigation and deletion</text>
+  <text x="602" y="773" class="cell">outcomes. Authorized operator access only.</text>
+  <text x="1090" y="750" class="cell-title">No explicit retention set in template</text>
+  <text x="1090" y="775" class="cell">Controlled by the deployed log-group configuration.</text>
+
+  <rect x="40" y="806" width="1520" height="88" fill="#fefce8"/>
+  <text x="64" y="850" class="cell-title">Ring client credentials + HMAC key</text>
+  <text x="342" y="838" class="cell-title">AWS SSM Parameter Store</text>
+  <text x="342" y="863" class="cell">KMS-backed SecureString</text>
+  <text x="602" y="838" class="cell">OAuth exchange and webhook verification.</text>
+  <text x="602" y="861" class="cell">Not embedded in application source.</text>
+  <text x="1090" y="838" class="cell-title">While the service is active</text>
+  <text x="1090" y="863" class="cell">Can be rotated or revoked; not Ring user data.</text>
+
+  <rect x="40" y="930" width="1520" height="94" rx="14" fill="#fffbeb" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="66" y="962" class="note-title">Retention review item</text>
+  <text x="66" y="988" class="note">The failure-only SQS dead-letter queue currently permits 14-day retention, and CloudWatch retention is not explicit in the template.</text>
+  <text x="66" y="1011" class="note">Document these metadata/log periods or configure shorter explicit retention before final certification submission.</text>
+
+  <text x="40" y="1060" class="footer">Account disconnect deletes DynamoDB-linked records and the S3 account prefix; TTL and lifecycle policies provide an automatic backstop.</text>
+</svg>
+
