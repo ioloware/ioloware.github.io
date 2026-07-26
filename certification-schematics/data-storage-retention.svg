@@ -51,7 +51,7 @@
   <text x="342" y="335" class="cell">TTL-enabled event rows</text>
   <text x="602" y="310" class="cell">List and sort recent motion / doorbell events.</text>
   <text x="602" y="333" class="cell">API Lambda reads for the authenticated Roku.</text>
-  <text x="1090" y="310" class="cell-title">Seven-day TTL</text>
+  <text x="1090" y="310" class="cell-title">One-day TTL</text>
   <text x="1090" y="335" class="cell">Also deleted on disconnect; TTL deletion is asynchronous.</text>
 
   <rect x="40" y="366" width="1520" height="88" fill="#ecfdf5"/>
@@ -60,7 +60,7 @@
   <text x="342" y="423" class="cell">Public access blocked</text>
   <text x="602" y="398" class="cell">Preview recent events. Processor Lambda writes;</text>
   <text x="602" y="421" class="cell">authorized Roku receives a 15-minute presigned URL.</text>
-  <text x="1090" y="398" class="cell-title">Seven-day S3 lifecycle</text>
+  <text x="1090" y="398" class="cell-title">One-day S3 lifecycle</text>
   <text x="1090" y="423" class="cell">Also deleted by account-prefix on disconnect.</text>
 
   <rect x="40" y="454" width="1520" height="88" fill="#ffffff"/>
@@ -69,7 +69,7 @@
   <text x="342" y="511" class="cell">Fetched only on demand</text>
   <text x="602" y="486" class="cell">Playback after the user selects an event.</text>
   <text x="602" y="509" class="cell">Authorized Roku receives a one-hour presigned URL.</text>
-  <text x="1090" y="486" class="cell-title">Seven-day S3 lifecycle</text>
+  <text x="1090" y="486" class="cell-title">One-day S3 lifecycle</text>
   <text x="1090" y="511" class="cell">Also deleted by account-prefix on disconnect.</text>
 
   <rect x="40" y="542" width="1520" height="88" fill="#f5f3ff"/>
@@ -119,4 +119,3 @@
 
   <text x="40" y="1060" class="footer">Account disconnect deletes DynamoDB-linked records and the S3 account prefix; TTL and lifecycle policies provide an automatic backstop.</text>
 </svg>
-

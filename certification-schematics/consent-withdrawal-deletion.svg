@@ -130,8 +130,8 @@
 
   <rect x="1175" y="710" width="365" height="142" class="node result" rx="16"/>
   <text x="1203" y="746" class="result-title">Automatic expiry backstop</text>
-  <text x="1203" y="775" class="result-body">Event rows: seven-day DynamoDB TTL</text>
-  <text x="1203" y="799" class="result-body">Snapshots / clips: seven-day S3 lifecycle</text>
+  <text x="1203" y="775" class="result-body">Event rows: one-day DynamoDB TTL</text>
+  <text x="1203" y="799" class="result-body">Snapshots / clips: one-day S3 lifecycle</text>
   <text x="1203" y="823" class="result-body">Pairing code: 15 min • Session: 90 days</text>
 
   <text x="60" y="902" class="note">Support-request deletion is an operational workflow; the automatic code path is the signed Ring disconnect webhook.</text>

@@ -88,13 +88,13 @@
   <text x="488" y="687" class="node-title">Amazon DynamoDB</text>
   <text x="488" y="715" class="node-body">Tokens • camera names • events</text>
   <text x="488" y="739" class="node-body">Sessions • pairing • Roku devices</text>
-  <text x="488" y="763" class="node-body">Event TTL: 7 days</text>
+  <text x="488" y="763" class="node-body">Event TTL: 1 day</text>
 
   <rect x="760" y="650" width="235" height="126" class="node node-data" rx="16"/>
   <text x="788" y="687" class="node-title">Private Amazon S3</text>
   <text x="788" y="715" class="node-body">Event snapshots</text>
   <text x="788" y="739" class="node-body">On-demand MP4 clips</text>
-  <text x="788" y="763" class="node-body">Lifecycle expiry: 7 days</text>
+  <text x="788" y="763" class="node-body">Lifecycle expiry: 1 day</text>
 
   <rect x="1040" y="650" width="140" height="126" class="node node-security" rx="16"/>
   <text x="1062" y="687" class="node-title">AWS SSM</text>
