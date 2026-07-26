@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Camera Dashboard | Certification Schematics</title>
+<meta name="description" content="Data-flow, storage, retention, pairing-security, and deletion schematics for Camera Dashboard certification review.">
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #f4f7fb;
+    --surface: #ffffff;
+    --text: #132038;
+    --muted: #526178;
+    --line: #d9e2ee;
+    --accent: #2563eb;
+    --accent-soft: #eff6ff;
+    --success-soft: #ecfdf5;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.55;
+  }
+  a { color: var(--accent); }
+  .wrap { width: min(1180px, calc(100% - 2rem)); margin: 0 auto; }
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--line);
+    padding: 1.1rem 0;
+  }
+  .eyebrow {
+    color: var(--accent);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    margin: 0 0 0.35rem;
+    text-transform: uppercase;
+  }
+  h1, h2 { line-height: 1.2; }
+  h1 { font-size: clamp(1.8rem, 4vw, 2.7rem); margin: 0; }
+  h2 { font-size: 1.5rem; margin: 0 0 0.55rem; }
+  p { margin: 0 0 0.8rem; }
+  .lede { color: var(--muted); margin: 0.65rem 0 0; max-width: 780px; }
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem 1rem;
+    margin-top: 1.2rem;
+  }
+  nav a { font-size: 0.92rem; font-weight: 600; }
+  main { padding: 2rem 0 4rem; }
+  .notice {
+    background: var(--accent-soft);
+    border: 1px solid #bfdbfe;
+    border-radius: 12px;
+    color: #1e3a8a;
+    margin-bottom: 1.5rem;
+    padding: 1rem 1.15rem;
+  }
+  .diagram {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    margin: 0 0 1.5rem;
+    padding: 1.25rem;
+    scroll-margin-top: 1rem;
+  }
+  .diagram-head {
+    align-items: start;
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+  .diagram-head p { color: var(--muted); margin: 0; max-width: 760px; }
+  .downloads { flex: 0 0 auto; white-space: nowrap; }
+  .downloads a + a { margin-left: 0.65rem; }
+  .diagram img {
+    background: #f8fafc;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    display: block;
+    height: auto;
+    width: 100%;
+  }
+  .controls {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin: 0 0 1.5rem;
+  }
+  .control {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 1.1rem;
+  }
+  .control.secure { background: var(--accent-soft); border-color: #bfdbfe; }
+  .control.disconnect { background: var(--success-soft); border-color: #a7f3d0; }
+  .control ul { margin: 0.55rem 0 0 1.15rem; padding: 0; }
+  .control li { margin: 0.3rem 0; }
+  footer { color: var(--muted); font-size: 0.88rem; padding: 0 0 2.5rem; }
+  @media (max-width: 720px) {
+    .controls { grid-template-columns: 1fr; }
+    .diagram-head { display: block; }
+    .downloads { margin-top: 0.65rem; }
+    .diagram { padding: 0.85rem; }
+  }
+  @media print {
+    body { background: #fff; }
+    header, .diagram, .control { break-inside: avoid; }
+    nav, .downloads { display: none; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <p class="eyebrow">Certification review material</p>
+    <h1>Camera Dashboard Schematics</h1>
+    <p class="lede">Data flow, security controls, storage, retention, and deletion behavior for the Ring-to-Roku integration.</p>
+    <nav aria-label="Schematic sections">
+      <a href="#data-flow">Data-flow overview</a>
+      <a href="#architecture">Detailed architecture</a>
+      <a href="#data-storage">Storage and retention</a>
+      <a href="#deletion">Disconnect and deletion</a>
+      <a href="#secure-pairing">Pairing security</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="notice"><strong>Reviewer note:</strong> This page contains supporting certification material and is intentionally separate from the customer-facing Camera Dashboard page.</p>
+
+  <section class="controls" aria-label="Security and disconnect summary">
+    <article class="control secure" id="secure-pairing">
+      <h2>Secure Roku pairing</h2>
+      <ul>
+        <li>Cryptographically random, single-use pairing code expires after 15 minutes.</li>
+        <li>The code can be claimed only from a Ring-authorized browser session.</li>
+        <li>A separate 256-bit polling secret prevents the code alone from retrieving a credential.</li>
+        <li>A separate 256-bit bearer device token authenticates later Roku API requests over HTTPS.</li>
+        <li>Pairing claims and polling are rate-limited.</li>
+      </ul>
+    </article>
+    <article class="control disconnect">
+      <h2>Two disconnect scopes</h2>
+      <p><strong>Roku channel:</strong> <em>Disconnect Ring Account</em> removes that Roku&rsquo;s server-side credential and clears its local token and cached account state. Other Roku devices and the Ring integration remain connected.</p>
+      <p><strong>Ring Appstore:</strong> Disconnecting Camera Dashboard stops processing for the Ring account and triggers deletion of its authorization tokens, events, media, sessions, and all pairing records.</p>
+    </article>
+  </section>
+
+  <section class="diagram" id="data-flow">
+    <div class="diagram-head">
+      <div>
+        <h2>Data-flow overview</h2>
+        <p>A concise view of authorization, secure intake, minimal processing, private storage, and delivery to an authenticated Roku.</p>
+      </div>
+      <p class="downloads"><a href="data-flow-overview.svg">SVG</a><a href="data-flow-overview.jpg">JPG</a></p>
+    </div>
+    <img src="data-flow-overview.svg" alt="Simplified five-stage Camera Dashboard data-flow diagram">
+  </section>
+
+  <section class="diagram" id="architecture">
+    <div class="diagram-head">
+      <div>
+        <h2>Detailed architecture</h2>
+        <p>End-to-end Ring authorization, webhook, AWS service, storage, and Roku request paths.</p>
+      </div>
+      <p class="downloads"><a href="data-flow-architecture.svg">SVG</a><a href="data-flow-architecture.jpg">JPG</a></p>
+    </div>
+    <img src="data-flow-architecture.svg" alt="Detailed Camera Dashboard data-flow architecture">
+  </section>
+
+  <section class="diagram" id="data-storage">
+    <div class="diagram-head">
+      <div>
+        <h2>Data storage and retention</h2>
+        <p>Storage locations, purposes, access paths, retention periods, and deletion controls by data type.</p>
+      </div>
+      <p class="downloads"><a href="data-storage-retention.svg">SVG</a><a href="data-storage-retention.jpg">JPG</a></p>
+    </div>
+    <img src="data-storage-retention.svg" alt="Camera Dashboard data storage and retention inventory">
+  </section>
+
+  <section class="diagram" id="deletion">
+    <div class="diagram-head">
+      <div>
+        <h2>Consent withdrawal and deletion</h2>
+        <p>Account-wide deletion following a Ring disconnect or a verified privacy request.</p>
+      </div>
+      <p class="downloads"><a href="consent-withdrawal-deletion.svg">SVG</a><a href="consent-withdrawal-deletion.jpg">JPG</a></p>
+    </div>
+    <img src="consent-withdrawal-deletion.svg" alt="Camera Dashboard consent withdrawal and deletion workflow">
+  </section>
+</main>
+
+<footer class="wrap">
+  Camera Dashboard by Ioloware &middot; Supporting material for Ring certification review
+</footer>
+</body>
+</html>
