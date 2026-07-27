@@ -44,8 +44,20 @@
   main { max-width: 960px; margin: 0 auto; padding: 0 1.5rem 4rem; }
   section { margin-top: 3.5rem; }
 
-  .hero { display: flex; flex-wrap: wrap; align-items: center; gap: 2rem; margin-top: 3rem; }
-  .hero img { width: 290px; max-width: 100%; border-radius: 12px; }
+  .hero { display: flex; flex-wrap: wrap; align-items: center; gap: 2.5rem; margin-top: 3rem; }
+  .hero-visual {
+    flex: 0 1 380px;
+    margin: 0;
+    max-width: 46%;
+  }
+  .hero-visual img {
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+    display: block;
+  }
   .hero-text { flex: 1 1 320px; }
   h1 { font-size: 2.4rem; line-height: 1.15; margin-bottom: 0.75rem; }
   .tagline { font-size: 1.25rem; color: var(--accent); margin-bottom: 1.25rem; }
@@ -72,7 +84,9 @@
   }
   .btn:hover { filter: brightness(1.15); }
 
-  .screens { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
+  .screens { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; }
+  .screen { margin: 0; }
+  .screen-wide { grid-column: 1 / -1; }
   .screens img {
     width: 100%;
     height: auto;
@@ -81,6 +95,13 @@
     display: block;
   }
   .caption { color: var(--muted); font-size: 0.9rem; margin-top: 0.4rem; }
+
+  @media (max-width: 700px) {
+    .hero { gap: 1.75rem; }
+    .hero-visual { flex-basis: 100%; max-width: 100%; }
+    .screens { grid-template-columns: 1fr; }
+    .screen-wide { grid-column: auto; }
+  }
 
   .notice {
     background: var(--panel);
@@ -136,7 +157,9 @@
 
 <main>
   <div class="hero">
-    <img src="images/channel-art.png" alt="Camera Dashboard channel art">
+    <figure class="hero-visual">
+      <img src="images/camera-dashboard-tv-roku-app-store-light-1024.png" width="1024" height="1024" alt="Camera Dashboard displaying recent Ring camera activity on a Roku TV" fetchpriority="high">
+    </figure>
     <div class="hero-text">
       <h1>Camera Dashboard</h1>
       <p class="tagline">Keep an eye on all your Ring cameras from your Roku TV.</p>
@@ -151,14 +174,18 @@
   </section>
 
   <section class="screens">
-    <div>
+    <figure class="screen">
+      <img src="images/main_menu_1280x720.jpg" width="1280" height="720" loading="lazy" alt="Camera Dashboard Roku main menu with camera overview, recent events, camera filter, account controls, and about options">
+      <figcaption class="caption">Simple Roku controls for browsing cameras, filtering events, and managing your connection.</figcaption>
+    </figure>
+    <figure class="screen">
       <img src="images/events-grid.jpg" alt="Camera Dashboard on Roku showing a grid of recent motion events from multiple Ring cameras">
-      <p class="caption">Every camera&rsquo;s latest motion event in one clear overview.</p>
-    </div>
-    <div>
+      <figcaption class="caption">Every camera&rsquo;s latest motion event in one clear overview.</figcaption>
+    </figure>
+    <figure class="screen screen-wide">
       <img src="images/tv-lifestyle.png" alt="A living-room TV showing Camera Dashboard playing recorded events from four cameras">
-      <p class="caption">Watch recorded events right on your TV.</p>
-    </div>
+      <figcaption class="caption">Watch recorded events right on your TV.</figcaption>
+    </figure>
   </section>
 
   <section>
