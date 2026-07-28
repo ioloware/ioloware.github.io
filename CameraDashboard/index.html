@@ -266,7 +266,8 @@
     <p>After pairing, the Roku receives a separate 256-bit random device token. It is stored in the Roku registry and sent only over HTTPS as a bearer credential for Camera Dashboard API requests. Disconnecting the Roku deletes the corresponding server-side device credential and clears the token and cached account state from that Roku.</p>
 
     <h3 id="retention-deletion">Retention and Deletion</h3>
-    <p>Camera event records, snapshots, and downloaded recordings become eligible for automatic deletion one day after they are stored. Deletion is performed automatically by our cloud provider and may take additional time to complete.</p>
+    <p>Camera event records, snapshots, downloaded recordings, and unprocessed event queue messages become eligible for automatic deletion no later than one day after they are stored. Deletion is performed automatically by our cloud provider and may take additional time to complete.</p>
+    <p>Operational logs contain no snapshot or video content and are retained for seven days.</p>
     <p>Pairing codes expire after 15 minutes, and browser pairing sessions expire after 90 days. Authorization tokens and paired Roku device records are retained while the Ring account remains connected.</p>
 
     <h3 id="privacy-rights">Your Choices and Privacy Rights</h3>
