@@ -90,8 +90,8 @@
   <text x="602" y="662" class="cell">Reliable event delivery, retry and failure isolation.</text>
   <text x="602" y="685" class="cell">Processor drops events after an account is removed.</text>
   <text x="1090" y="657" class="cell-title">Normally removed immediately after processing</text>
-  <text x="1090" y="681" class="cell">Main queue: AWS default, up to 4 days.</text>
-  <text x="1090" y="704" class="cell">Dead-letter queue: currently up to 14 days.</text>
+  <text x="1090" y="681" class="cell">Main queue: up to 1 day.</text>
+  <text x="1090" y="704" class="cell">Dead-letter queue: up to 1 day.</text>
 
   <rect x="40" y="718" width="1520" height="88" fill="#ffffff"/>
   <text x="64" y="750" class="cell-title">Operational logs and opaque IDs</text>
@@ -100,8 +100,8 @@
   <text x="342" y="775" class="cell">Lambda logs and metrics</text>
   <text x="602" y="750" class="cell">Troubleshooting, security investigation and deletion</text>
   <text x="602" y="773" class="cell">outcomes. Authorized operator access only.</text>
-  <text x="1090" y="750" class="cell-title">No explicit retention set in template</text>
-  <text x="1090" y="775" class="cell">Controlled by the deployed log-group configuration.</text>
+  <text x="1090" y="750" class="cell-title">7-day deployed retention</text>
+  <text x="1090" y="775" class="cell">No snapshot or video content is logged.</text>
 
   <rect x="40" y="806" width="1520" height="88" fill="#fefce8"/>
   <text x="64" y="850" class="cell-title">Ring client credentials + HMAC key</text>
@@ -112,10 +112,10 @@
   <text x="1090" y="838" class="cell-title">While the service is active</text>
   <text x="1090" y="863" class="cell">Can be rotated or revoked; not Ring user data.</text>
 
-  <rect x="40" y="930" width="1520" height="94" rx="14" fill="#fffbeb" stroke="#f59e0b" stroke-width="1.5"/>
-  <text x="66" y="962" class="note-title">Retention review item</text>
-  <text x="66" y="988" class="note">The failure-only SQS dead-letter queue currently permits 14-day retention, and CloudWatch retention is not explicit in the template.</text>
-  <text x="66" y="1011" class="note">Document these metadata/log periods or configure shorter explicit retention before final certification submission.</text>
+  <rect x="40" y="930" width="1520" height="94" rx="14" fill="#ecfdf5" stroke="#34d399" stroke-width="1.5"/>
+  <text x="66" y="962" class="note-title">Operational retention controls</text>
+  <text x="66" y="988" class="note">Successful queue messages are removed immediately; unprocessed messages expire within one day.</text>
+  <text x="66" y="1011" class="note">CloudWatch retains operational logs for seven days and does not contain snapshot or video content.</text>
 
   <text x="40" y="1060" class="footer">Account disconnect deletes DynamoDB-linked records and the S3 account prefix; TTL and lifecycle policies provide an automatic backstop.</text>
 </svg>
